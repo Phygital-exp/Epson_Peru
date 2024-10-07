@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Epson Perú Phygital</title>
+    <title>ChatBot Integrado con Video Adaptativo</title>
     <link rel="stylesheet" type="text/css" href="https://botai.smartdataautomation.com/static/css/chat_box.css">
     <style>
         body {
@@ -37,7 +37,7 @@
 </head>
 <body>
 
-    <video id="background-video" autoplay loop playsinline>
+    <video id="background-video" autoplay loop>
         <source src="https://s3.amazonaws.com/botgen/Uploads/Epson_1728310627.mp4" type="video/mp4">
         Tu navegador no soporta la reproducción de video.
     </video>
@@ -66,11 +66,6 @@
         var ChatBotItem = new ChatBot(Params);
 
         var video = document.getElementById('background-video');
-
-        window.onload = function() {
-            video.play();
-            video.muted = false; // Activar el sonido
-        };
 
         document.getElementById('live-chat').addEventListener('click', function() {
             video.pause();
