@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ChatBot Integrado con Video Adaptativo</title>
-    <!-- CSS del Bot -->
+    <title>Epson Perú Phygital</title>
     <link rel="stylesheet" type="text/css" href="https://botai.smartdataautomation.com/static/css/chat_box.css">
     <style>
         body {
@@ -15,18 +14,18 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            background-color: #f0f0f0; /* Fondo para mejor contraste */
+            background-color: #000000;
         }
-        /* Ajustar el video a un tamaño más pequeño y centrado */
+        
         video {
-            width: 80%;
+            width: 90%;
             max-width: 600px;
             height: auto;
-            border: 2px solid #ccc;
+            border: 1px solid #000000;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
-        /* Ajustar el contenedor del chatbot */
+        
         #live-chat {
             position: fixed;
             bottom: 20px;
@@ -38,62 +37,56 @@
 </head>
 <body>
 
-    <!-- Contenedor del Video -->
-    <video id="background-video" autoplay loop>
+    <video id="background-video" autoplay loop playsinline>
         <source src="https://s3.amazonaws.com/botgen/Uploads/Epson_1728310627.mp4" type="video/mp4">
         Tu navegador no soporta la reproducción de video.
     </video>
 
-    
-    <div id="live-chat" ></div> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="https://botai.smartdataautomation.com/static/css/chat_box.css"> 
+    <div id="live-chat"></div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://botai.smartdataautomation.com/static/js/linkify.js"></script> 
-    <script src="https://botai.smartdataautomation.com/static/js/linkify-html.js"></script> 
+    <script src="https://botai.smartdataautomation.com/static/js/linkify.js"></script>
+    <script src="https://botai.smartdataautomation.com/static/js/linkify-html.js"></script>
     <script src="https://tweetnacl.js.org/nacl.min.js"></script>
     <script src="https://tweetnacl.js.org/nacl-util.min.js"></script>
     <script src="https://bundle.run/buffer@6.0.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/tweetnacl-sealedbox-js@1.2.0/sealedbox.web.js"></script>
-    <script type="text/javascript" src="https://botai.smartdataautomation.com/static/js/BotScript/chatbot.js"></script> 
-    <script type="text/javascript" src="https://botai.smartdataautomation.com/static/js/BotScript/geolocalization.js"></script> 
-    <script type="text/javascript" src="https://botai.smartdataautomation.com/static/js/BotScript/calendar.js"></script> 
-    <script type="text/javascript"> 
-      var  Params = { 
-        'BotId':2250, 
-        'BotVersionId':2188, 
-        'BotHost' : 'https://botai.smartdataautomation.com', 
-        'Initial_Step': '/reset',
-        'user_vars':  {
-          
-        }
- 
-      } 
-        var  ChatBotItem = new ChatBot(Params); 
+    <script type="text/javascript" src="https://botai.smartdataautomation.com/static/js/BotScript/chatbot.js"></script>
+    <script type="text/javascript" src="https://botai.smartdataautomation.com/static/js/BotScript/geolocalization.js"></script>
+    <script type="text/javascript" src="https://botai.smartdataautomation.com/static/js/BotScript/calendar.js"></script>
+    <script type="text/javascript">
+        var Params = { 
+            'BotId': 2250, 
+            'BotVersionId': 2188, 
+            'BotHost': 'https://botai.smartdataautomation.com', 
+            'Initial_Step': '/reset',
+            'user_vars': {}
+        };
+
         var ChatBotItem = new ChatBot(Params);
 
-        // Obtener el video
         var video = document.getElementById('background-video');
 
-        // Detener el video y el audio cuando se haga clic para abrir el chatbot
+        window.onload = function() {
+            video.play();
+            video.muted = false; // Activar el sonido
+        };
+
         document.getElementById('live-chat').addEventListener('click', function() {
             video.pause();
-            video.muted = true; // Pausar el audio al abrir el bot
+            video.muted = true;
         });
 
-        // Reanudar el video y el audio si el chatbot se cierra
         document.addEventListener('click', function(event) {
             if (!event.target.closest('#live-chat')) {
                 video.play();
-                video.muted = false; // Reanudar el audio al cerrar el bot
+                video.muted = false;
             }
         });
 
-        // Si hay un evento específico del bot que indique cuando se cierra, usa ese evento para reanudar el video
         $(document).on('chatbot:closed', function() {
             video.play();
-            video.muted = false; // Reanudar el audio
+            video.muted = false; 
         });
     </script>
 
